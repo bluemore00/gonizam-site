@@ -267,6 +267,20 @@ function StoreButton({ children = '쿠팡에서 보기', variant = 'solid', plac
   );
 }
 
+// 혼잣말(명조체) 속 문장부호만 프리텐다드로 표시 — 명조체 물음표·말줄임표가 한글 옆에서 어색해 보이지 않도록
+function Voice({ children }) {
+  if (typeof children !== 'string') return children;
+  return children.split(/([?!.,…]+)/).map((part, i) =>
+    /^[?!.,…]+$/.test(part) ? (
+      <span key={i} className="font-sans font-medium">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
+
 const container = 'mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12';
 
 /* =========================================================
@@ -283,7 +297,7 @@ function HomePage() {
             <h1 className="mt-6 font-serif text-4xl font-semibold leading-[1.35] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
               오늘은
               <br />
-              빨리 잘 수 있을까?
+              <Voice>빨리 잘 수 있을까?</Voice>
             </h1>
             <p className="mt-7 max-w-md text-base leading-relaxed text-muted sm:text-lg">
               누구나 한 번쯤 해 본 혼잣말이죠.
@@ -351,7 +365,7 @@ function HomePage() {
                     m.morning ? 'text-ink' : 'text-linen'
                   }`}
                 >
-                  {m.line}
+                  <Voice>{m.line}</Voice>
                 </p>
               </Reveal>
             ))}
@@ -520,13 +534,17 @@ function HomePage() {
                   {t.time}
                 </p>
                 <h3 className="mt-3 text-lg font-semibold">{t.title}</h3>
-                <p className="mt-2 font-serif text-xl text-muted">{t.thought}</p>
+                <p className="mt-2 font-serif text-xl text-muted">
+                  <Voice>{t.thought}</Voice>
+                </p>
               </Reveal>
             ))}
           </ol>
           <Reveal className="mt-24 text-center" delay={200}>
             <p className="text-sm text-muted">그리고 다음 날 아침,</p>
-            <p className="mt-4 font-serif text-2xl font-semibold sm:text-3xl">잠이 많이 필요했나 보다.</p>
+            <p className="mt-4 font-serif text-2xl font-semibold sm:text-3xl">
+              <Voice>잠이 많이 필요했나 보다.</Voice>
+            </p>
           </Reveal>
         </div>
       </section>
@@ -568,7 +586,7 @@ function HomePage() {
           <p className="mt-6 font-serif text-3xl font-semibold leading-snug sm:text-4xl">
             내일은 개운하게
             <br />
-            일어날 수 있을까?
+            <Voice>일어날 수 있을까?</Voice>
           </p>
           <p className="mt-6 text-lg text-ink/70 sm:text-xl">그런 밤이라면, 고니잠이 곁에 있을게요.</p>
           <div className="mt-12 flex justify-center">
@@ -591,9 +609,9 @@ function V2Page({ navigate }) {
           <div className="md:col-span-5">
             <Eyebrow light>RELAXFILL V2 · 개발 중</Eyebrow>
             <h1 className="mt-6 font-serif text-4xl font-semibold leading-[1.35] sm:text-5xl">
-              마사지 끝나면,
+              <Voice>마사지 끝나면,</Voice>
               <br />
-              그대로 잠들고 싶어.
+              <Voice>그대로 잠들고 싶어.</Voice>
             </h1>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-sand/75">
               릴렉스필을 쓰신 분들의 이 마음을 담아, 다음 릴렉스필을 만들고 있어요.
