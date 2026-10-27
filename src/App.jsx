@@ -6,6 +6,10 @@ import relaxfillV1 from './assets/relaxfill-v1.webp';
 import relaxfillLifestyle from './assets/relaxfill-v1-lifestyle.webp';
 import relaxfillV2 from './assets/relaxfill-v2-concept.webp';
 import evening from './assets/evening.webp';
+import iconNeck from './assets/icons/neck-support.webp';
+import iconMassage from './assets/icons/gentle-massage.webp';
+import iconWarmth from './assets/icons/warmth.webp';
+import iconSupport from './assets/icons/steady-support.webp';
 
 /* =========================================================
  * 사이트 기본 정보 — 여기만 고치면 페이지 전체에 반영됩니다.
@@ -47,11 +51,12 @@ const HOME_NAV = [
 /* =========================================================
  * 문구 — 잠 못 드는 밤의 혼잣말로 이야기를 이어갑니다.
  * ========================================================= */
+// morning: true 인 줄은 밝아진 아침 배경 위에 놓여 어두운 글자로 표시됩니다.
 const NIGHT_MONOLOGUE = [
   { time: '밤 11:30', line: '내일 일찍 일어나야 하는데… 오늘은 빨리 잘 수 있을까?' },
   { time: '밤 12:40', line: '잠이 중요한 건 아는데, 잠이 안 와요.' },
   { time: '새벽 1:20', line: '목이 뻐근해서 자꾸 뒤척이게 되네.' },
-  { time: '아침 7:00', line: '어젯밤은 좀 불편했는데..' },
+  { time: '아침 7:00', line: '어젯밤은 좀 불편했는데..', morning: true },
 ];
 
 const REASONS = [
@@ -62,8 +67,8 @@ const REASONS = [
   },
   {
     no: '02',
-    title: '세게 누르지 않아요',
-    body: '한의학과 두개천골요법(CST)에서 영감을 얻은, 부드럽고 반복적인 저자극 리듬이에요.',
+    title: '수면을 위해 설계한 자극',
+    body: '세게 풀어주는 마사지가 아니에요. 잠들기 좋도록, 세게 누르지 않는 부드러운 리듬으로 설계했어요.',
   },
   {
     no: '03',
@@ -73,19 +78,26 @@ const REASONS = [
 ];
 
 const FEATURES = [
-  { title: '후두부·경추 지지', body: '머리와 목이 만나는 곳을 안정적으로 받쳐 주는 곡면 구조' },
-  { title: '저자극 마사지', body: '강한 압박 대신 부드럽고 반복적인 리듬' },
-  { title: '온열 케어', body: '하루의 긴장을 내려놓는 시간을 함께하는 따뜻한 온기' },
-  { title: '30분 자동 종료', body: '30분이 지나면 스스로 멈춰, 따로 끄지 않아도 돼요' },
-  { title: '그대로 베개로', body: '마사지가 끝난 뒤에도 그대로 베고 잠들 수 있어요' },
-  { title: 'USB-C 충전', body: '선 없이 침대 위에서 편하게 쓰는 충전식' },
+  { icon: iconNeck, title: '후두부·경추 지지', body: '머리와 목이 만나는 곳을 안정적으로 받쳐 주는 곡면 구조' },
+  { icon: iconMassage, title: '저자극 마사지', body: '강한 압박 대신 부드럽고 반복적인 리듬' },
+  { icon: iconWarmth, title: '온열 케어', body: '피부 접촉면 기준 약 41°C의 따뜻한 온기' },
+  { icon: iconSupport, title: '그대로 베개로', body: '마사지가 끝난 뒤에도 그대로 베고 잠들 수 있어요' },
+];
+
+// 제품 사양 칩
+const SPECS = ['30분 자동 종료', 'USB-C 충전 · 1회 충전 약 6회 사용', '높이 약 10cm', '길이 약 57cm'];
+
+// 제품 사진 위 표시점 (x, y = 사진 안에서의 위치 %)
+const HOTSPOTS = [
+  { n: 1, x: 57, y: 47, label: '머리와 목이 닿는 곳', body: '온열과 저자극 마사지가 후두부·목 주변에 닿아요' },
+  { n: 2, x: 17, y: 90, label: '조작 버튼', body: '버튼 하나로 켜고, 30분이 지나면 스스로 꺼져요' },
 ];
 
 const TONIGHT = [
-  { step: '1', title: '눕는다', thought: '“아, 따뜻하다.”' },
-  { step: '2', title: '온기와 리듬이 번진다', thought: '“목이 좀 풀리는 것 같아.”' },
-  { step: '3', title: '스스로 멈춘다', thought: '“어, 벌써 끝났네.”' },
-  { step: '4', title: '그대로 잠든다', thought: '“…”' },
+  { step: '1', time: '0분', title: '눕는다', thought: '“아, 따뜻하다.”' },
+  { step: '2', time: '~ 30분', title: '온기와 리듬이 번진다', thought: '“목이 좀 풀리는 것 같아.”' },
+  { step: '3', time: '30분', title: '스스로 멈춘다', thought: '“어, 벌써 끝났네.”' },
+  { step: '4', time: '그 후', title: '그대로 잠든다', thought: '“…”' },
 ];
 
 // 자주 묻는 질문 — 묶음별로 정리. open: true 는 처음부터 펼쳐 둡니다.
@@ -268,7 +280,7 @@ function HomePage() {
         <div className={`${container} grid items-center gap-12 py-16 md:grid-cols-12 md:py-24 lg:gap-20`}>
           <div className="md:col-span-6">
             <Eyebrow>잠들기 전, 고니잠</Eyebrow>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.3] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
+            <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.35] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
               “오늘은
               <br />
               빨리 잘 수 있을까?”
@@ -308,23 +320,44 @@ function HomePage() {
       </section>
 
       {/* 2. 하룻밤의 혼잣말 */}
-      <section id="night" className="bg-night py-24 text-linen sm:py-36">
-        <div className={container}>
+      {/* 배경이 스크롤을 따라 밤(남색) → 새벽 → 아침(따뜻한 빛)으로 바뀝니다 */}
+      <section
+        id="night"
+        className="text-linen"
+        style={{
+          background:
+            'linear-gradient(180deg, #212834 0%, #2b3240 22%, #363a52 40%, #55536e 55%, #8d8095 66%, #c9b0a6 76%, #ecdccd 85%, #f7efe6 100%)',
+        }}
+      >
+        <div className={`${container} py-28 sm:py-40`}>
           <Reveal>
             <Eyebrow light>어젯밤, 우리의 혼잣말</Eyebrow>
           </Reveal>
-          <ol className="mt-14 space-y-14 sm:space-y-20">
+          <ol className="mt-20 space-y-28 sm:space-y-44">
             {NIGHT_MONOLOGUE.map((m, i) => (
-              <Reveal as="li" key={m.time} delay={i * 80} className="grid gap-3 md:grid-cols-12 md:items-baseline">
-                <span className="text-sm font-semibold tabular-nums text-sand/50 md:col-span-2">{m.time}</span>
-                <p className="text-2xl font-semibold leading-snug tracking-tight sm:text-3xl md:col-span-10 lg:text-4xl">
+              <Reveal
+                as="li"
+                key={m.time}
+                delay={i * 80}
+                className={`grid gap-3 md:grid-cols-12 md:items-baseline ${m.morning ? 'pt-24 sm:pt-40' : ''}`}
+              >
+                <span
+                  className={`text-sm font-semibold tabular-nums md:col-span-2 ${m.morning ? 'text-ink/50' : 'text-sand/60'}`}
+                >
+                  {m.time}
+                </span>
+                <p
+                  className={`font-serif text-[1.65rem] font-bold leading-snug sm:text-3xl md:col-span-10 lg:text-[2.6rem] ${
+                    m.morning ? 'text-ink' : 'text-linen'
+                  }`}
+                >
                   “{m.line}”
                 </p>
               </Reveal>
             ))}
           </ol>
-          <Reveal className="mt-24 border-t border-linen/10 pt-14 sm:mt-32">
-            <p className="max-w-2xl text-lg leading-relaxed text-sand/80 sm:text-xl">
+          <Reveal className="mt-24 border-t border-ink/10 pt-14 sm:mt-32">
+            <p className="max-w-2xl text-lg leading-relaxed text-ink/75 sm:text-xl">
               몸은 누웠는데, 마음과 어깨는 아직 하루를 붙잡고 있는 밤.
               <br className="hidden sm:block" />
               고니잠은 그 밤의 혼잣말에서 시작했어요.
@@ -397,15 +430,43 @@ function HomePage() {
               </div>
             </Reveal>
             <Reveal className="md:col-span-7" delay={150}>
-              <img
-                src={relaxfillV1}
-                alt="고니잠 릴렉스필 베개"
-                width="862"
-                height="707"
-                loading="lazy"
-                decoding="async"
-                className="mx-auto w-full max-w-xl"
-              />
+              <div className="relative mx-auto w-full max-w-xl">
+                <img
+                  src={relaxfillV1}
+                  alt="고니잠 릴렉스필 베개"
+                  width="862"
+                  height="707"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full"
+                />
+                {HOTSPOTS.map((h) => (
+                  <span
+                    key={h.n}
+                    className="absolute -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: `${h.x}%`, top: `${h.y}%` }}
+                    aria-hidden="true"
+                  >
+                    <span className="absolute inset-0 rounded-full bg-linen/70 motion-safe:animate-ping" />
+                    <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-ink text-xs font-semibold text-linen ring-4 ring-linen/80">
+                      {h.n}
+                    </span>
+                  </span>
+                ))}
+              </div>
+              <ol className="mx-auto mt-6 grid max-w-xl gap-4 sm:grid-cols-2">
+                {HOTSPOTS.map((h) => (
+                  <li key={h.n} className="flex gap-3">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-[11px] font-semibold text-linen">
+                      {h.n}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold">{h.label}</p>
+                      <p className="mt-0.5 text-sm leading-relaxed text-muted">{h.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </Reveal>
           </div>
 
@@ -419,11 +480,20 @@ function HomePage() {
             ))}
           </ul>
 
-          <ul className="mt-5 grid gap-px overflow-hidden rounded-3xl border border-stone bg-stone sm:grid-cols-2 lg:grid-cols-3">
-            {FEATURES.map((f) => (
-              <li key={f.title} className="bg-linen p-6">
-                <h3 className="text-sm font-semibold">{f.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{f.body}</p>
+          <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((f, i) => (
+              <Reveal as="li" key={f.title} delay={i * 100} className="rounded-3xl bg-linen p-7">
+                <img src={f.icon} alt="" width="160" height="160" loading="lazy" className="h-16 w-16" />
+                <h3 className="mt-5 font-semibold">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{f.body}</p>
+              </Reveal>
+            ))}
+          </ul>
+
+          <ul className="mt-5 flex flex-wrap gap-2" aria-label="제품 사양">
+            {SPECS.map((s) => (
+              <li key={s} className="rounded-full border border-stone bg-linen px-4 py-2 text-sm text-ink/80">
+                {s}
               </li>
             ))}
           </ul>
@@ -446,14 +516,17 @@ function HomePage() {
                   </span>
                   {i < TONIGHT.length - 1 && <span className="hidden h-px flex-1 bg-stone lg:block" aria-hidden="true" />}
                 </div>
-                <h3 className="mt-5 text-lg font-semibold">{t.title}</h3>
-                <p className="mt-2 text-lg text-muted">{t.thought}</p>
+                <p className="mt-5 inline-block rounded-full bg-sand px-3 py-1 text-xs font-semibold tabular-nums text-dusk">
+                  {t.time}
+                </p>
+                <h3 className="mt-3 text-lg font-semibold">{t.title}</h3>
+                <p className="mt-2 font-serif text-xl text-muted">{t.thought}</p>
               </Reveal>
             ))}
           </ol>
           <Reveal className="mt-24 text-center" delay={200}>
             <p className="text-sm text-muted">그리고 다음 날 아침,</p>
-            <p className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">“잠이 많이 필요했나 보다.”</p>
+            <p className="mt-4 font-serif text-2xl font-bold sm:text-3xl">“잠이 많이 필요했나 보다.”</p>
           </Reveal>
         </div>
       </section>
@@ -492,7 +565,7 @@ function HomePage() {
       <section className="bg-sand py-24 sm:py-36">
         <Reveal className="mx-auto max-w-3xl px-5 text-center sm:px-8">
           <p className="text-lg text-ink/70 sm:text-xl">오늘 하루도 수고 많았어요.</p>
-          <p className="mt-6 text-3xl font-semibold leading-snug tracking-tight sm:text-4xl">
+          <p className="mt-6 font-serif text-3xl font-bold leading-snug sm:text-4xl">
             “내일은 개운하게
             <br />
             일어날 수 있을까?”
@@ -517,7 +590,7 @@ function V2Page({ navigate }) {
         <div className={`${container} grid items-center gap-12 md:grid-cols-12 lg:gap-20`}>
           <div className="md:col-span-5">
             <Eyebrow light>RELAXFILL V2 · 개발 중</Eyebrow>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.3] tracking-tight sm:text-5xl">
+            <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.35] sm:text-5xl">
               “마사지 끝나면,
               <br />
               그대로 잠들고 싶어.”
@@ -551,9 +624,13 @@ function V2Page({ navigate }) {
               다음 릴렉스필은 마사지가 끝나면 모듈이 베개 안으로 들어가, 그대로 편안한 수면 자세로 이어지는 것을 목표로 개발하고 있어요.
             </p>
           </Reveal>
-          <ul className="mt-14 grid gap-5 md:grid-cols-3">
+          <ul className="mt-14 grid gap-5 md:grid-cols-2">
             {[
               { t: '그대로 베개가 돼요', b: '마사지 모듈이 베개 안으로 들어가, 목에 걸리는 느낌 없이 그대로 잠들 수 있도록.' },
+              {
+                t: '닿는 위치와 방식부터 다시',
+                b: '한의학에서 주목해 온 후두부 주변의 위치와, 두개천골요법(CST)의 부드럽고 반복적인 방식에서 영감을 얻어 설계하고 있어요.',
+              },
               { t: '나에게 맞춰 가요', b: '사용하는 사람의 상태와 취향에 맞춰 리듬과 세기를 조절하는 방향을 연구하고 있어요.' },
               { t: '안전을 먼저 생각해요', b: '누르는 힘이 과하지 않도록 하중을 살피는 안전 설계를 함께 검토하고 있어요.' },
             ].map((x, i) => (
