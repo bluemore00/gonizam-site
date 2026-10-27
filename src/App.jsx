@@ -280,7 +280,7 @@ function HomePage() {
         <div className={`${container} grid items-center gap-12 py-16 md:grid-cols-12 md:py-24 lg:gap-20`}>
           <div className="md:col-span-6">
             <Eyebrow>잠들기 전, 고니잠</Eyebrow>
-            <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.35] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
+            <h1 className="mt-6 font-serif text-4xl font-semibold leading-[1.35] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
               오늘은
               <br />
               빨리 잘 수 있을까?
@@ -347,7 +347,7 @@ function HomePage() {
                   {m.time}
                 </span>
                 <p
-                  className={`font-serif text-[1.65rem] font-bold leading-snug sm:text-3xl md:col-span-10 lg:text-[2.6rem] ${
+                  className={`font-serif text-[1.65rem] font-semibold leading-snug sm:text-3xl md:col-span-10 lg:text-[2.6rem] ${
                     m.morning ? 'text-ink' : 'text-linen'
                   }`}
                 >
@@ -526,7 +526,7 @@ function HomePage() {
           </ol>
           <Reveal className="mt-24 text-center" delay={200}>
             <p className="text-sm text-muted">그리고 다음 날 아침,</p>
-            <p className="mt-4 font-serif text-2xl font-bold sm:text-3xl">잠이 많이 필요했나 보다.</p>
+            <p className="mt-4 font-serif text-2xl font-semibold sm:text-3xl">잠이 많이 필요했나 보다.</p>
           </Reveal>
         </div>
       </section>
@@ -565,7 +565,7 @@ function HomePage() {
       <section className="bg-sand py-24 sm:py-36">
         <Reveal className="mx-auto max-w-3xl px-5 text-center sm:px-8">
           <p className="text-lg text-ink/70 sm:text-xl">오늘 하루도 수고 많았어요.</p>
-          <p className="mt-6 font-serif text-3xl font-bold leading-snug sm:text-4xl">
+          <p className="mt-6 font-serif text-3xl font-semibold leading-snug sm:text-4xl">
             내일은 개운하게
             <br />
             일어날 수 있을까?
@@ -590,7 +590,7 @@ function V2Page({ navigate }) {
         <div className={`${container} grid items-center gap-12 md:grid-cols-12 lg:gap-20`}>
           <div className="md:col-span-5">
             <Eyebrow light>RELAXFILL V2 · 개발 중</Eyebrow>
-            <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.35] sm:text-5xl">
+            <h1 className="mt-6 font-serif text-4xl font-semibold leading-[1.35] sm:text-5xl">
               마사지 끝나면,
               <br />
               그대로 잠들고 싶어.

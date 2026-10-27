@@ -2,7 +2,7 @@
 
 /* Quiet Wellness — 낮은 채도, 따뜻한 중립색, 절제된 강조색 */
 @theme {
-  --font-serif: "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif; /* 혼잣말 전용 */
+  --font-serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif; /* 혼잣말 전용 */
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 
   --color-linen: #ffffff;   /* 기본 배경 */
