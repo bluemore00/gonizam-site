@@ -182,7 +182,7 @@ export default function App() {
           scrolled || menuOpen ? 'bg-linen/90 backdrop-blur-md border-b border-stone/60' : 'bg-transparent'
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-[1360px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <a href="#top" onClick={closeMenu} aria-label="고니잠 홈으로">
             <img src={logo} alt="GONIZAM" width="811" height="134" className="h-5 w-auto sm:h-6" />
           </a>
@@ -243,10 +243,10 @@ export default function App() {
       <main id="top">
         {/* HERO */}
         <section className="relative overflow-hidden pt-16">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 md:grid-cols-12 md:py-24">
+          <div className="mx-auto grid max-w-[1360px] items-center gap-12 px-5 py-16 sm:px-8 lg:px-12 lg:gap-20 md:grid-cols-12 md:py-24">
             <div className="md:col-span-6">
               <Eyebrow>Sleep Wellness · Pre-Sleep Care</Eyebrow>
-              <h1 className="mt-6 text-4xl font-semibold leading-[1.25] tracking-tight sm:text-5xl md:text-[3.4rem]">
+              <h1 className="mt-6 text-4xl font-semibold leading-[1.25] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
                 좋은 잠은
                 <br />
                 잠들기 전부터
@@ -291,7 +291,7 @@ export default function App() {
 
         {/* STORY — 문제 정의 */}
         <section id="story" className="bg-night py-24 text-linen sm:py-32">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12">
             <div className="grid gap-14 md:grid-cols-12">
               <div className="md:col-span-5">
                 <Eyebrow light>Sleep doesn&apos;t start in bed</Eyebrow>
@@ -339,7 +339,7 @@ export default function App() {
 
         {/* WHY PILLOW */}
         <section className="py-24 sm:py-32">
-          <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 md:grid-cols-12">
+          <div className="mx-auto grid max-w-[1360px] items-center gap-14 px-5 sm:px-8 lg:px-12 lg:gap-20 md:grid-cols-12">
             <div className="order-2 md:order-1 md:col-span-5">
               <img
                 src={evening}
@@ -370,7 +370,7 @@ export default function App() {
 
         {/* RELAXFILL V1 */}
         <section id="relaxfill" className="bg-sand py-24 sm:py-32">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12">
             <div className="grid items-center gap-12 md:grid-cols-12">
               <div className="md:col-span-5">
                 <Eyebrow>RELAXFILL V1</Eyebrow>
@@ -415,7 +415,7 @@ export default function App() {
 
         {/* RITUAL */}
         <section id="ritual" className="py-24 sm:py-32">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12">
             <div className="max-w-xl">
               <Eyebrow>Pre-sleep ritual</Eyebrow>
               <h2 className="mt-6 text-3xl font-semibold leading-snug tracking-tight sm:text-4xl">
@@ -445,7 +445,7 @@ export default function App() {
         {/* V2 PREVIEW */}
         {SHOW_V2_PREVIEW && (
           <section className="bg-night py-24 text-linen sm:py-32">
-            <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 md:grid-cols-12">
+            <div className="mx-auto grid max-w-[1360px] items-center gap-12 px-5 sm:px-8 lg:px-12 lg:gap-20 md:grid-cols-12">
               <div className="md:col-span-5">
                 <Eyebrow light>Next · 개발 중</Eyebrow>
                 <h2 className="mt-6 text-3xl font-semibold leading-snug tracking-tight sm:text-4xl">
@@ -477,7 +477,7 @@ export default function App() {
 
         {/* PROMISE */}
         <section id="promise" className="py-24 sm:py-32">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12">
             <div className="max-w-xl">
               <Eyebrow>Our promise</Eyebrow>
               <h2 className="mt-6 text-3xl font-semibold leading-snug tracking-tight sm:text-4xl">
@@ -514,7 +514,7 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t border-stone bg-linen py-14">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12">
           <div className="flex flex-col gap-10 md:flex-row md:justify-between">
             <div>
               <img src={logo} alt="GONIZAM" width="811" height="134" loading="lazy" className="h-5 w-auto" />
