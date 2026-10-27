@@ -4,7 +4,7 @@
 @theme {
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 
-  --color-linen: #f6f3ee;   /* 기본 배경 */
+  --color-linen: #ffffff;   /* 기본 배경 */
   --color-sand: #ebe5db;    /* 보조 배경 */
   --color-stone: #d9d2c6;   /* 경계선 */
   --color-ink: #24272d;     /* 본문 */
