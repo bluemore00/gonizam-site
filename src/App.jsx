@@ -76,7 +76,7 @@ const FEATURES = [
   { title: '후두부·경추 지지', body: '머리와 목이 만나는 곳을 안정적으로 받쳐 주는 곡면 구조' },
   { title: '저자극 마사지', body: '강한 압박 대신 부드럽고 반복적인 리듬' },
   { title: '온열 케어', body: '하루의 긴장을 내려놓는 시간을 함께하는 따뜻한 온기' },
-  { title: '자동 종료', body: '이완이 끝나면 스스로 멈춰, 따로 끄지 않아도 돼요' },
+  { title: '30분 자동 종료', body: '30분이 지나면 스스로 멈춰, 따로 끄지 않아도 돼요' },
   { title: '그대로 베개로', body: '마사지가 끝난 뒤에도 그대로 베고 잠들 수 있어요' },
   { title: 'USB-C 충전', body: '선 없이 침대 위에서 편하게 쓰는 충전식' },
 ];
@@ -88,23 +88,56 @@ const TONIGHT = [
   { step: '4', title: '그대로 잠든다', thought: '“…”' },
 ];
 
-const FAQ = [
+// 자주 묻는 질문 — 묶음별로 정리. open: true 는 처음부터 펼쳐 둡니다.
+const FAQ_GROUPS = [
   {
-    q: '의료기기인가요?',
-    a: '아니요. 잠들기 전 편안한 휴식을 돕는 생활 제품이에요. 질병의 진단·치료·예방을 목적으로 하지 않아요.',
+    title: '어떤 제품인가요',
+    items: [
+      {
+        q: '그냥 마사지기랑 뭐가 달라요?',
+        a: '릴렉스필은 잠들기 전 시간을 위해 만든 베개예요. 마사지가 끝나면 스스로 멈추고, 그대로 베고 잠들 수 있어요.',
+      },
+      {
+        q: '의료기기인가요?',
+        a: '아니요. 잠들기 전 편안한 휴식을 돕는 생활 제품이에요. 질병의 진단·치료·예방을 목적으로 하지 않아요.',
+        open: true,
+      },
+      {
+        q: '베개 높이가 저한테 맞을까요?',
+        a: '높이는 약 10cm, 길이는 약 57cm예요. 평소 쓰시는 베개 높이와 비교해 보시면 도움이 돼요.',
+      },
+    ],
   },
   {
-    q: '마사지가 끝나면 어떻게 되나요?',
-    a: '정해진 시간이 지나면 스스로 멈춰요. 그대로 베고 주무시면 돼요.',
+    title: '쓰는 방법',
+    items: [
+      { q: '한 번에 얼마나 작동해요?', a: '30분이 지나면 스스로 멈춰요. 따로 끄지 않아도 돼요.' },
+      {
+        q: '충전은 얼마나 자주 해야 해요?',
+        a: 'USB-C로 충전하고, 한 번 충전하면 약 6회 사용할 수 있어요. 충전 중에는 사용하지 않는 것을 권장해요.',
+      },
+      { q: '소리가 나지는 않나요?', a: '조용한 사무실 정도의 소리예요.' },
+    ],
   },
   {
-    q: '충전은 어떻게 하나요?',
-    a: 'USB-C 케이블로 충전해요. 자세한 사용 시간과 사양은 판매 페이지에서 확인해 주세요.',
+    title: '안전하게 쓰려면',
+    items: [
+      { q: '아이도 써도 되나요?', a: '어린이는 전문의와 상담한 뒤 사용해 주세요.' },
+      { q: '온열이 너무 뜨겁진 않나요?', a: '피부에 닿는 면을 기준으로 약 41도예요. 따뜻하게 느껴지는 정도로 설계했어요.' },
+    ],
   },
   {
-    q: '다음 릴렉스필도 준비하고 있나요?',
-    a: '네, 이완이 끝나면 마사지 모듈이 베개 안으로 들어가는 다음 버전을 개발하고 있어요.',
-    link: true,
+    title: '관리와 A/S',
+    items: [
+      {
+        q: '커버는 빨 수 있어요?',
+        a: '별도의 베개 커버를 씌워 사용해 주세요. 오염되었을 때는 물티슈로 가볍게 닦아 주세요.',
+      },
+      {
+        q: '고장 나면 어떻게 하나요?',
+        a: `구매일로부터 12개월 동안 무상 A/S를 받을 수 있어요. 다만 제품 규격 외 용도로 사용해 생긴 파손과 고장은 보증되지 않아요. 고객센터(${CONTACT.email})로 연락 주세요.`,
+      },
+    ],
   },
 ];
 
@@ -227,7 +260,7 @@ const container = 'mx-auto max-w-[1360px] px-5 sm:px-8 lg:px-12';
 /* =========================================================
  * 첫 페이지 — 하룻밤의 이야기
  * ========================================================= */
-function HomePage({ navigate }) {
+function HomePage() {
   return (
     <main id="top">
       {/* 1. 말 걸기 */}
@@ -432,34 +465,24 @@ function HomePage({ navigate }) {
             <Eyebrow>FAQ</Eyebrow>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight">자주 묻는 질문</h2>
           </div>
-          <div className="divide-y divide-stone border-y border-stone md:col-span-8">
-            {FAQ.map((f) => (
-              <details key={f.q} className="group py-6">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-semibold [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <span className="text-2xl font-light text-muted transition-transform group-open:rotate-45" aria-hidden="true">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-4 leading-relaxed text-muted">
-                  {f.a}
-                  {f.link && (
-                    <>
-                      {' '}
-                      <a
-                        href={V2_PATH}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(V2_PATH);
-                        }}
-                        className="font-semibold text-ink underline underline-offset-4"
-                      >
-                        다음 릴렉스필 보기
-                      </a>
-                    </>
-                  )}
-                </p>
-              </details>
+          <div className="space-y-12 md:col-span-8">
+            {FAQ_GROUPS.map((group) => (
+              <div key={group.title}>
+                <h3 className="text-sm font-semibold text-dusk">{group.title}</h3>
+                <div className="mt-3 divide-y divide-stone border-y border-stone">
+                  {group.items.map((f) => (
+                    <details key={f.q} className="group py-5" open={f.open}>
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                        {f.q}
+                        <span className="text-2xl font-light text-muted transition-transform group-open:rotate-45" aria-hidden="true">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-3 leading-relaxed text-muted">{f.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -681,7 +704,7 @@ export default function App() {
         )}
       </header>
 
-      {onV2 ? <V2Page navigate={navigate} /> : <HomePage navigate={navigate} />}
+      {onV2 ? <V2Page navigate={navigate} /> : <HomePage />}
 
       <footer className="border-t border-stone bg-linen py-14">
         <div className={container}>
