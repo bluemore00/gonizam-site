@@ -94,10 +94,10 @@ const HOTSPOTS = [
 ];
 
 const TONIGHT = [
-  { step: '1', time: '0분', title: '눕는다', thought: '“아, 따뜻하다.”' },
-  { step: '2', time: '~ 30분', title: '온기와 리듬이 번진다', thought: '“목이 좀 풀리는 것 같아.”' },
-  { step: '3', time: '30분', title: '스스로 멈춘다', thought: '“어, 벌써 끝났네.”' },
-  { step: '4', time: '그 후', title: '그대로 잠든다', thought: '“…”' },
+  { step: '1', time: '0분', title: '눕는다', thought: '아, 따뜻하다.' },
+  { step: '2', time: '~ 30분', title: '온기와 리듬이 번진다', thought: '목이 좀 풀리는 것 같아.' },
+  { step: '3', time: '30분', title: '스스로 멈춘다', thought: '어, 벌써 끝났네.' },
+  { step: '4', time: '그 후', title: '그대로 잠든다', thought: '…' },
 ];
 
 // 자주 묻는 질문 — 묶음별로 정리. open: true 는 처음부터 펼쳐 둡니다.
@@ -281,9 +281,9 @@ function HomePage() {
           <div className="md:col-span-6">
             <Eyebrow>잠들기 전, 고니잠</Eyebrow>
             <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.35] tracking-tight sm:text-5xl md:text-[3.4rem] xl:text-[4rem]">
-              “오늘은
+              오늘은
               <br />
-              빨리 잘 수 있을까?”
+              빨리 잘 수 있을까?
             </h1>
             <p className="mt-7 max-w-md text-base leading-relaxed text-muted sm:text-lg">
               누구나 한 번쯤 해 본 혼잣말이죠.
@@ -351,7 +351,7 @@ function HomePage() {
                     m.morning ? 'text-ink' : 'text-linen'
                   }`}
                 >
-                  “{m.line}”
+                  {m.line}
                 </p>
               </Reveal>
             ))}
@@ -526,7 +526,7 @@ function HomePage() {
           </ol>
           <Reveal className="mt-24 text-center" delay={200}>
             <p className="text-sm text-muted">그리고 다음 날 아침,</p>
-            <p className="mt-4 font-serif text-2xl font-bold sm:text-3xl">“잠이 많이 필요했나 보다.”</p>
+            <p className="mt-4 font-serif text-2xl font-bold sm:text-3xl">잠이 많이 필요했나 보다.</p>
           </Reveal>
         </div>
       </section>
@@ -566,9 +566,9 @@ function HomePage() {
         <Reveal className="mx-auto max-w-3xl px-5 text-center sm:px-8">
           <p className="text-lg text-ink/70 sm:text-xl">오늘 하루도 수고 많았어요.</p>
           <p className="mt-6 font-serif text-3xl font-bold leading-snug sm:text-4xl">
-            “내일은 개운하게
+            내일은 개운하게
             <br />
-            일어날 수 있을까?”
+            일어날 수 있을까?
           </p>
           <p className="mt-6 text-lg text-ink/70 sm:text-xl">그런 밤이라면, 고니잠이 곁에 있을게요.</p>
           <div className="mt-12 flex justify-center">
@@ -591,9 +591,9 @@ function V2Page({ navigate }) {
           <div className="md:col-span-5">
             <Eyebrow light>RELAXFILL V2 · 개발 중</Eyebrow>
             <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.35] sm:text-5xl">
-              “마사지 끝나면,
+              마사지 끝나면,
               <br />
-              그대로 잠들고 싶어.”
+              그대로 잠들고 싶어.
             </h1>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-sand/75">
               릴렉스필을 쓰신 분들의 이 마음을 담아, 다음 릴렉스필을 만들고 있어요.
