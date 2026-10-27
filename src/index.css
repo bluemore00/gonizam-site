@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* Quiet Wellness — 낮은 채도, 따뜻한 중립색, 절제된 강조색 */
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+
+  --color-linen: #f6f3ee;   /* 기본 배경 */
+  --color-sand: #ebe5db;    /* 보조 배경 */
+  --color-stone: #d9d2c6;   /* 경계선 */
+  --color-ink: #24272d;     /* 본문 */
+  --color-muted: #6b6b6b;   /* 보조 텍스트 */
+  --color-dusk: #4f5d73;    /* 강조색 (저녁 하늘의 낮은 채도 블루그레이) */
+  --color-night: #2b3240;   /* 어두운 섹션 배경 */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+  }
+  body {
+    @apply bg-linen text-ink antialiased;
+    word-break: keep-all;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
