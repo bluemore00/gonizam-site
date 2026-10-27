@@ -10,7 +10,39 @@ import evening from './assets/evening.webp';
 /* =========================================================
  * 사이트 기본 정보 — 여기만 고치면 페이지 전체에 반영됩니다.
  * ========================================================= */
-const STORE_URL = 'https://shop.coupang.com/haruyeobaek?platform=p'; // 구매 버튼 연결 주소
+// 구매 버튼 연결 주소 (쿠팡 릴렉스필 V1 상품 페이지)
+const STORE_URL = 'https://www.coupang.com/vp/products/9738726820?itemId=29146827219';
+
+// Google Analytics 4 측정 ID (예: 'G-ABC123XYZ'). 넣으면 방문자 수와 '구매하기' 클릭 수가 집계됩니다.
+// 비워 두면 분석 스크립트를 불러오지 않습니다.
+const GA_MEASUREMENT_ID = '';
+
+function useAnalytics() {
+  useEffect(() => {
+    if (!GA_MEASUREMENT_ID || window.gtag) return;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(script);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments); // eslint-disable-line prefer-rest-params
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID);
+  }, []);
+}
+
+// '구매하기' 클릭 기록. placement = 어느 버튼에서 눌렀는지 (hero, product, header 등)
+function trackPurchaseClick(placement) {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'purchase_click', {
+      placement,
+      link_url: STORE_URL,
+      transport_type: 'beacon',
+    });
+  }
+}
 
 const CONTACT = {
   phone: '', // 고객센터 번호를 넣으면 푸터에 표시됩니다
@@ -115,7 +147,7 @@ function Eyebrow({ children, light = false }) {
   );
 }
 
-function StoreButton({ children = '쿠팡에서 구매하기', variant = 'solid' }) {
+function StoreButton({ children = '쿠팡에서 구매하기', variant = 'solid', placement }) {
   const styles =
     variant === 'solid'
       ? 'bg-ink text-linen hover:bg-dusk'
@@ -125,6 +157,7 @@ function StoreButton({ children = '쿠팡에서 구매하기', variant = 'solid'
       href={STORE_URL}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackPurchaseClick(placement)}
       className={`inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-colors ${styles}`}
     >
       {children}
@@ -139,6 +172,7 @@ export default function App() {
   const active = useActiveSection(SECTION_IDS);
   const closeMenu = () => setMenuOpen(false);
   const businessInfo = BUSINESS_INFO.filter((i) => i.value.trim());
+  useAnalytics();
 
   return (
     <div className="min-h-screen bg-linen text-ink">
@@ -170,6 +204,7 @@ export default function App() {
             href={STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackPurchaseClick('header')}
             className="hidden rounded-full bg-ink px-5 py-2 text-xs font-semibold text-linen transition-colors hover:bg-dusk md:inline-flex"
           >
             구매하기
@@ -199,7 +234,7 @@ export default function App() {
               ))}
             </ul>
             <div className="mt-6">
-              <StoreButton />
+              <StoreButton placement="mobile_menu" />
             </div>
           </nav>
         )}
@@ -348,7 +383,7 @@ export default function App() {
                   잠들기 전 베개에 누운 그대로, 후두부와 목 주변에 온기와 부드러운 마사지를 더합니다. 이완이 끝나면 그대로 베고 잠드세요.
                 </p>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                  <StoreButton />
+                  <StoreButton placement="product" />
                 </div>
               </div>
               <div className="md:col-span-7">
@@ -471,7 +506,7 @@ export default function App() {
             </p>
             <p className="mt-10 text-2xl font-semibold tracking-tight sm:text-3xl">더 나은 수면으로 더 나은 일상을.</p>
             <div className="mt-12 flex justify-center">
-              <StoreButton>릴렉스필 만나보기</StoreButton>
+              <StoreButton placement="closing">릴렉스필 만나보기</StoreButton>
             </div>
           </div>
         </section>
@@ -510,7 +545,7 @@ export default function App() {
                 <p className="font-semibold">스토어</p>
                 <ul className="mt-3 space-y-2 text-muted">
                   <li>
-                    <a href={STORE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-ink">
+                    <a href={STORE_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackPurchaseClick('footer')} className="inline-flex items-center gap-1 hover:text-ink">
                       쿠팡 공식 판매처 <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
                     </a>
                   </li>
